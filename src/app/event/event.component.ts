@@ -11,13 +11,21 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 })
 export class EventComponent implements OnInit{
   title = 'app works!';
-  events: Event[];
-  week: number = 0
+  events: Event[][];
+  week: number = 0;
   constructor(private eventService: EventService) { }
 
   getEvents(week: number): void {
     this.eventService.getEvents(week)
-    .then(events => this.events = events);
+    .then(events => {
+      this.events = new Array<Array<Event>>();
+      for (let i = 0; i < 7; i++) {
+        this.events[i] = new Array<Event>();
+      }
+      events.forEach(element => {
+        this.events[new Date(element.dateFrom).getDay() - 1].push(element)
+      });
+    });
   }
 
   getPrevious(): void{

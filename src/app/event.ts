@@ -1,7 +1,7 @@
 export class Event {
     eventID: String
-    dateFrom: String
-    dateTo: String
+    dateFrom: Date
+    dateTo: Date
     user: String
     createdDate: String
     isActive: String

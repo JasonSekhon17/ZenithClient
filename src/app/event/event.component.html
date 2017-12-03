@@ -1,19 +1,51 @@
-<!--<div>
-  <h1>Showing Events for the week of {{ weekOf | date:'MMM dd, yyyy':'UTC' }}</h1>
-  <table>
-    <ng-container *ngFor="let day of Events; let i=index">
-      <ng-container *ngIf="day.length > 0">
-        <tr><th colspan="2">
-          {{ day[0].eventDate | date:'MMM dd, yyyy':'UTC' }}
-        </th></tr>
-        <tr *ngFor="let event of day">
-          <td>{{ event.startTime }} - {{ event.endTime }}</td>
-          <td>{{ event.activityDescription }} </td>
+<div>
+  <h1 class="title">Zenith Events</h1>
+  
+  
+  <table class="table table-bordered zenith-table">
+    <tr><button on-click="getPrevious()">Previous</button><button on-click="getNext()">Next</button></tr>
+    <ng-container *ngFor="let event of events">
+      <ng-container *ngIf="event.length > 0">
+        <tr>
+          <th class="table-head" colspan="2" style="text-align:center;">
+            {{event[0].dateFrom | date: d}}
+          </th>
         </tr>
+          <tr *ngFor="let e of event">
+            <td width="20%">
+              {{e.dateFrom | date: "h:mma"}} - {{e.dateTo | date: "h:mma"}}
+            </td>
+            <td>{{e.activityCategory.activityDescription}}</td>
+          </tr>
       </ng-container>
     </ng-container>
   </table>
-  <button on-click="previous()">Previous</button>
-  <button on-click="next()">Next</button>
-</div>-->
-<h3>test</h3>
+  
+  
+</div>
+<!--
+<table class="table table-bordered zenith-table">
+  foreach (var item in dict)
+  {
+      <tr>
+          <th class="table-head" colspan="2" style="text-align:center;">
+              @(item.Key.ToString("D"))
+          </th>
+      </tr>
+      foreach (var desc in @item.Value)
+      {
+          <tr>
+              <td width="20%">
+                  @(desc.DateFrom.ToString("h:mm tt "))
+                  -
+                  @(desc.DateTo.ToString(" h:mm tt"))
+              </td>
+              <td>
+                  @(desc.ActivityCategory.ActivityDescription)
+              </td>
+          </tr>
+      }
+  }
+</table>
+
+-->
